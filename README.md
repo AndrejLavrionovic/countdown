@@ -41,6 +41,19 @@ The concept of the show is based on game showed earler in the France called: 'De
 $ git clone https://github.com/AndrejLavrionovic/countdown
 ```
 2) Start drracket
+
 3) File -> Open -> .../countdown/countdown.rkt
+
 4) Press run button on the right top corner of drracket editor.
+
+### Solution for Countdown numbers game
+One of the algorithm that can be used to figure out the solution is Brute-force search.
+It is a very general technique of sloving problems. This method assumes to check all possible candidates
+and pick those who satisfies the solution for the problem.
+
+Adopted from [Wikipedia](https://en.wikipedia.org/wiki/Brute-force_search)
+
+Tip (by Ian Mcloughlin): Try to work on easer broblem first rather then to work on complicated problem.
+Instead of work with list of six numbers, try to use list of two numbers first and see how it is work.
+
 
