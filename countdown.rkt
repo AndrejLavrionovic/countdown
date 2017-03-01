@@ -46,9 +46,17 @@
 ; and list of operators
 ; but first we'll define the function for perform all operations
 
-(define (calculate operations l)
-  (if (null? ops)
-      null
-      ((car ops) (car l) (cdr l))))
+(define (calc_func oprs l res)
+  (if (null? oprs) res
+      (calc_func (cdr oprs) l (cons ((car oprs) (car l) (car (cdr l))) res))))
 
-(calculate (ops nums))
+; This function takes as arguments:
+; - list of operators eg.(+ * / -)
+; - list of two numbers eg.(6 3)
+; - empty list
+
+(define l1 (list 6 3))
+
+(calc_func ops l1 null)
+; Result returned by calc_func: '(2 3 18 9)
+
