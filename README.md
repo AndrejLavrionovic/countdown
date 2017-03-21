@@ -56,4 +56,20 @@ Adopted from [Wikipedia](https://en.wikipedia.org/wiki/Brute-force_search)
 Tip (by Ian Mcloughlin): Try to work on easer broblem first rather then to work on complicated problem.
 Instead of work with list of six numbers, try to use list of two numbers first and see how it is work.
 
+The function that I defined returns four solution with no repeating, that is count only 2 + 4 and skips 4 + 2.
 
+```racket
+(define (calc_func1 oprs oprssymb l res)
+  (if (null? oprs) res
+      (calc_func1 (cdr oprs) (cdr oprssymb) l (cons
+                               (list (car l) (car oprssymb) (car (cdr l)) '=
+                                     ((car oprs) (car l) (car (cdr l))))
+                                res))))
+```
+ and result is:
+ ```racket
+ '((6 - 3 = 3)
+  (6 / 3 = 2)
+  (6 * 3 = 18)
+  (6 + 3 = 9))
+ ```
