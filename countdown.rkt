@@ -60,3 +60,18 @@
 (calc_func ops l1 null)
 ; Result returned by calc_func: '(2 3 18 9)
 
+; output with solution:
+'(solution with two numbers)
+(define opssymb (list '+ '* '/ '-))
+(define ops1 (list + * / -))
+
+(define (calc_func1 oprs oprssymb l res)
+  (if (null? oprs) res
+      (calc_func1 (cdr oprs) (cdr oprssymb) l (cons
+                               (list (car l) (car oprssymb) (car (cdr l)) '=
+                                     ((car oprs) (car l) (car (cdr l))))
+                                res))))
+
+(calc_func1 ops1 opssymb l1 null)
+'(====================================)
+
