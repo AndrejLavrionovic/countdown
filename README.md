@@ -73,3 +73,18 @@ The function that I defined returns four solution with no repeating, that is cou
   (6 * 3 = 18)
   (6 + 3 = 9))
  ```
+
+As we can see from example above in line 3 there is recursive function that calls it self. Using this ability we can change some state of function's properties. Also there should be the way to stop recursion or it will iterate infinitely. In code snipet from above there is condition that tells \- if list 'oprs' is not null (empty) do recursion or return list 'res' in other case. List 'oprs' contains four basic operators: {+, \*, /, \-} , so 'calc_func1' iterates 4 times. In every next recursion (cdr oprs) is passed as the parameter, that is list without first element. So if to take appart this part of code, we'll see that in first iteration list of {\*, /, \-} is passing to the function (cdr oprs). In second recursion - {/, \-} => (cdr (cdr oprs)), in thired \- {\-} => (cdr (cdr (cdr oprs))), end {} \- empty list will be passed on the end as (cdr (cdr (cdr (cdr oprs)))) will give as empty list. At the same time in every iteration the first element from the 'oprs' list is used for evaluation of maths expressions, that is:
+
+* \+ => (car oprs)
+* \* => (car (cdr oprs))
+* / => (car (cdr (cdr oprs)))
+* \- => (car (cdr (cdr (cdr oprs))))
+
+To print all solutions function takes another list of operator's literals 
+```racket
+(define opssymb (list '+ '* '/ '-))
+...
+(list (car l) (car oprssymb) (car (cdr l)) '=
+      ((car oprs) (car l) (car (cdr l))))
+```
