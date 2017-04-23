@@ -105,6 +105,7 @@
 (valid-rpn? valid-permutation '())
 (valid-rpn? not-valid-permutation '())
 
+'(====================================)
 ; functions generating combinatons of numbers and permutations
 
 ; function that implements values for rpn patterns
@@ -146,3 +147,13 @@
 ; and (list -1) on the end
  (map make-rpn pattern-permutations)
 
+'(=====================================)
+; Next step is to generate combinations of numbers
+
+; Two following functions are generating the all available permutations
+; of the given number.
+(define X (combinations nums))
+
+(map permutations X)
+
+'(======================================)
