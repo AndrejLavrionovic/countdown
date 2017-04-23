@@ -21,7 +21,7 @@
 
 ; sum
 (define (sum l)
-  (+ (car l) (cdr l)))
+  (+ (car l) (car (cdr l))))
 
 ; multiplication
 (define (mult l)
@@ -75,3 +75,32 @@
 (calc_func1 ops1 opssymb l1 null)
 '(====================================)
 
+; Here is the function that checks is the permutation is valid
+; where e is expression such as (1 1 1 1 1 1 -1 -1 -1 -1 -1)
+; and s is stack
+
+; 1) stack functions
+(define (poll-last st) (car (reverse st)))
+(define (add-last st x) (append st (list x)))
+(define (all-but-last st) (reverse (cdr (reverse st))))
+
+; 2) Function it self
+(define (valid-rpn? e stack)
+  (if (null? e) #t
+      (cond
+        [(= (car e) 1) (valid-rpn? (cdr e) (add-last stack 1))]
+        [else
+         (if (> (length stack) 1)
+             (if (and (= (car (reverse stack)) 1)
+                       (= (car (cdr (reverse stack))) 1))
+                  (valid-rpn? (cdr e)
+                              (add-last (all-but-last (all-but-last stack)) 1))
+                  #f)
+             #f)])))
+
+; Test of function is here:
+(define valid-permutation '(1 1 1 -1 1 -1 -1 1 -1 1 -1))
+(define not-valid-permutation '(1 1 1 -1 1 -1 -1 -1 1 1 -1))
+
+(valid-rpn? valid-permutation '())
+(valid-rpn? not-valid-permutation '())
