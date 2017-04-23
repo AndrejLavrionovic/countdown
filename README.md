@@ -88,3 +88,33 @@ To print all solutions function takes another list of operator's literals
 (list (car l) (car oprssymb) (car (cdr l)) '=
       ((car oprs) (car l) (car (cdr l))))
 ```
+
+### Steps for implementation the solution
+
+To solve the countdown problem, it should be broken down on the smaller steps. Each stem should solve the particular part of the problem that is can be considered as the component of the solution. Thus, it is very important to be clear what components the solution consist from.
+
+Initially there is given goal number, set of numbers and default set of operators. To get the goal number we need to calculate all possible combinations of number set. This can be the first step - get all possibles permutations of numbers.
+
+To figure out the second step there is Reverse Polish Notation technique can be considered. The feature of RPN is that calculation performs using tree concept where the root is last operator and leaves are operands. Another thing is that operator is always goes last, after two operands. It means that calculation process from the leaves, but not from root. So, the expression (3 + 5) \* (7 – 2) in RPN conversion will be written in this format: 3 5 + 7 2 – \*. To perform this calculation, we need to use the stack concept. Start reading from left to right and if there is operand, putting it into stack, but if there is operator, then pulling two operands out, performing the calculation and putting the result back to the stack. The last number in the stack will be result. So:
+
+1.	Push 3 onto the stack.
+2.	Push 5 onto the stack. Reading from the bottom, the stack now contains (3, 5).
+3.	Apply the + operation: take the top two numbers off the stack, add them together, and put the result back on the stack. The stack now contains just the number 8.
+4.	Push 7 onto the stack.
+5.	Push 2 onto the stack. It now contains (8, 7, 2).
+6.	Apply the – operation: take the top two numbers off the stack, subtract the top one from the one below, and put the result back on the stack. The stack now contains (8, 5).
+7.	Apply the * operation: take the top two numbers off the stack, multiply them together, and put the result back on the stack. The stack now contains just the number 40.
+
+After the taking apart the reverse polish notation technique, there are some rules can be emphasised, such as if operator is in turn, then stack must contain at least two numbers. Based on this fact we can figure out that next component of the solution can be pattern of calculation. If to represent numbers as 1s and operators as -1s, then pattern can be looked like this: 
+(1 1 1 -1 1 -1 -1 1 -1 1 -1).
+
+As positive 1 will be replaced with numbers and there is set of all possible permutations, then next problem is to replace all negative 1s with operators. So, third component must be all possible combination if operators. It is hard task to evaluate with using recursive way.
+
+The las two steps is to perform evaluation where firstly - each 1 in the each valid pattern need to be replaced with number from each permutation and each -1 need to be replaced with each operator from each combination of operators. And second and final step is to evaluate each solution using rpn technique where the last number in the stack must be result and compare each result with given goal number. If there will be equality, then It’ll be solution.
+
+### Difficultuies in the project.
+
+* I didn't find the way how to generate the all available combination of operators using recursion.
+
+* it was not easy to understand the way how is Racket language arranged. Still not very much clear, but I thing it is very strong and efficient aproach to evaluate different problems by implementing techinques and algorithms using Racket.
+
