@@ -152,8 +152,21 @@
 
 ; Two following functions are generating the all available permutations
 ; of the given number.
-(define X (combinations nums))
+(define given-numbers (list 9 5 7 6 8 1))
+
+(define X (combinations given-numbers))
 
 (map permutations X)
 
 '(======================================)
+; When patterns and number permutations are generated
+; next we need the combination of operators
+
+; Then each 1 in the each valid pattern need to be replaced
+; by number from each permutation and each -1 need
+; to be replaced by each operator from each combination of operators.
+;
+; Final step is to evaluate each solution using rpn technique
+; where the last number in the stack must be results and compare
+; each result with given total. If there will be equality, then it'll
+; be solution.
