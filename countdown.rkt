@@ -104,3 +104,45 @@
 
 (valid-rpn? valid-permutation '())
 (valid-rpn? not-valid-permutation '())
+
+; functions generating combinatons of numbers and permutations
+
+; function that implements values for rpn patterns
+; considering that pattern is allways starts from
+; (1 1) and ends with (-1), the function genirates just
+; middle part of pattern.
+(define (opers-ops-nums num res)
+  (if (= num 0) res
+      (opers-ops-nums (- num 1) (append (list -1 1) res))))
+
+
+; assume there is combination of 4 numbers
+; 1s -representing operands
+; -1s -representing operators, then
+; pattern must contain 4 numbers and 3 operators - (1 1 1 1 -1 -1 -1)
+; with default (1 1) and (-1) we need to generate 2 more of both
+; numbers and operators, thus call this function with parameter 2 and
+; empty list. It returns (-1 1 -1 1).
+; pattern order is not important as it will be shuffled with
+; permutation function.
+(opers-ops-nums 2 '())
+
+(define (comb l)
+  (opers-ops-nums l '()))
+(define start-perm (comb 4))
+
+; creates all available permutations with given pattern
+(define pattern-permutations(remove-duplicates (permutations start-perm)))
+
+; this function is concatinating the generated middle part with
+; start list (1 1) and end list (-1)
+(define (make-rpn l)
+  (append (list 1 1) l (list -1)))
+
+; map is very important function in racket
+; it glue elements together
+; it takes each available pattern and concatinates the
+; (list 1 1) on the start
+; and (list -1) on the end
+ (map make-rpn pattern-permutations)
+
